@@ -8,7 +8,7 @@ import {
   Button
 } from 'react-native';
 
-
+import axios from 'axios';
 
 export default class HomeScreen extends 
 
@@ -20,10 +20,19 @@ React.Component {
 
     this.state = {
 
-      input: '', 
-      data: null
+      input: ''
     }
   }
+
+  getShelters = () =>{
+
+    axios.get(`http://api.petfinder.com/pet.find?format=json&key=6a73b4c9e3c1fe19a365de064e4063ea&location=${this.state.input}`)
+
+    .then(res => this.props.navigation.navigate('Result', {data:res.data.petfinder.pets}))
+
+  }
+
+
   static navigationOptions = {
     title: 'Search',
   };
@@ -32,15 +41,7 @@ React.Component {
 
     //key for api
     let key = '6a73b4c9e3c1fe19a365de064e4063ea';
-    //secret for api
-    let secret = 'b6e85a88e2338ddaca51259d025b2965';
 
-
-
-    getPet = (input) =>{
-
-      fetch(`http://api.petfinder.com/breed.list?format=json&key=6a73b4c9e3c1fe19a365de064e4063ea&location=${input}` )
-    }
     
     return (
 
@@ -50,12 +51,15 @@ React.Component {
 
       <TextInput
         placeholder='Enter zipcode'
-        onChangeText={(text) => this.setState({text})}
+        onChangeText={(text) => this.setState({input:text})}
       />
 
       <Button
       title='Submit'
-      color='purple'></Button>
+      color='purple'
+      onPress={() => this.getShelters()}>
+      </Button>
+
       </View>
     );
   }
