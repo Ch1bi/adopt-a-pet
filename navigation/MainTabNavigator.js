@@ -5,7 +5,6 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ResultScreen from '../screens/ResultScreen'
-import FavsScreen from '../screens/FavsScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -26,23 +25,10 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const FavsStack = createStackNavigator({
-  Fav: FavsScreen,
-});
 
-FavsStack.navigationOptions = {
-  tabBarLabel: 'Favorites',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
-    />
-  ),
-};
 
    
 
 export default createBottomTabNavigator({
-  HomeStack,
-  FavsStack
+  HomeStack
 });

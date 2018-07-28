@@ -5,7 +5,8 @@ import {
   View,
   Text, 
   TextInput, 
-  Button
+  Button,
+  ScrollView
 } from 'react-native';
 
 
@@ -41,23 +42,25 @@ React.Component {
     
     return (
 
-      <View style={styles.container}>
-
+      
+ <ScrollView>
+     
       <List>
 
           { 
             params.pet.map((val, idx) => (
             <ListItem
                 roundAvatar
-                avatar={{uri:val.media.photos.photo.$t}}
+                avatar={{uri:val.media.photos.photo[0].$t}}
                 title={val.name.$t}
-                subtitle={val.breeds.breed[0].$t}
+                subtitle={val.breeds.breed.$t}
                 key={idx}
             />
           ))}
       </List>
 
-      </View>
+</ScrollView>
+      
     );
   }
 
